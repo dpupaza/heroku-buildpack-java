@@ -78,7 +78,6 @@ if [ -f $BUILD_DIR/settings.xml ]; then
   echo '</settings>' >> .m2/heroku-settings-tmp.xml
   rm .m2/custom-settings-tmp.xml
   mv .m2/heroku-settings-tmp.xml .m2/settings.xml
-  cat .m2/settings.xml
   echo " done"
 fi
 
@@ -88,7 +87,7 @@ cd $BUILD_DIR
 export MAVEN_OPTS="-Xmx1024m"
 
 # build app
-BUILDCMD="$CACHE_DIR/.maven/bin/mvn -B -Denv=dev -Duser.home=$BUILD_DIR -Dmaven.repo.local=$CACHE_DIR/.m2/repository -s $CACHE_DIR/.m2/settings.xml -DskipTests=true clean install"
+BUILDCMD="$CACHE_DIR/.maven/bin/mvn -B -Denv=prod -Duser.home=$BUILD_DIR -Dmaven.repo.local=$CACHE_DIR/.m2/repository -s $CACHE_DIR/.m2/settings.xml -DskipTests=true clean install"
 echo "-----> executing $BUILDCMD"
 
 $BUILDCMD 2>&1 | sed -u 's/^/       /'
