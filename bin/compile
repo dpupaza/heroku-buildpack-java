@@ -72,7 +72,7 @@ echo " done"
 
 if [ -f $BUILD_DIR/settings.xml ]; then
   echo -n "-----> Custom settings.xml detected. Merging with Heroku settings.xml ..."
-  sed -e /"\/"settings/d .m2/settings.xml > .m2/heroku-settings-tmp.xml
+  sed -e /"\<\/"settings"\>"/d .m2/settings.xml > .m2/heroku-settings-tmp.xml
   sed -e /"\<"settings/d $BUILD_DIR/settings.xml > .m2/custom-settings-tmp.xml
   cat .m2/custom-settings-tmp.xml >> .m2/heroku-settings-tmp.xml
   echo '</settings>' >> .m2/heroku-settings-tmp.xml
